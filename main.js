@@ -6,6 +6,18 @@ function render(s, target) {
   const formatter = new ChordPro.HtmlFormatter();
   const htmlTags = formatter.format(song);
   target.innerHTML = htmlTags.join("\n");
+  const replaceEntries = [
+    [/Maj|maj|M/g, "\uE18A"],
+    ["b", "\u266D"],
+    ["#", "\u266F"],
+    [/(.+)(\(.+?\))/g, "$1<sup>$2</sup>"],
+    [/^([^\(]+)([-+][59]|omit[35])/g, "$1<sup>$2</sup>"],
+  ];
+  target.querySelectorAll(".chord,.annotation").forEach((chord) => {
+    for (const [from, to] of replaceEntries) {
+      chord.innerHTML = chord.innerHTML.replaceAll(from, to);
+    }
+  });
 }
 const $ = (s) => document.querySelector(s);
 const target = $("main");
