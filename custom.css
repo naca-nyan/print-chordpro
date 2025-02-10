@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    font-family: serif;
+}
+h1, h2, h3 {
+    margin-block: 0;
+}
+.song-metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.comment-line {
+    font-size: smaller;
+    font-weight: bold;
+    font-style: italic;
+}
+.song-content {
+    column-count: 2;
+}
+.lyrics-line {
+    break-inside: avoid-column;
+    margin-bottom: 0.2em;
+}
+.chord, .annotation {
+    line-height: 0.5em;
+    font-weight: initial;
+    font-family: "MuseJazz Text";
+}
+@font-face {
+    font-family: "MuseJazz Text";
+    src:
+        local("MuseJazz Text"),
+        url(https://cdn.jsdelivr.net/npm/@vexflow-fonts/musejazztext@1.0.1/musejazztext.woff2)
+        format("woff2");
+}
+.chord {
+    color: blue;
+}
+
+main {
+    width: 80%;
+    margin: 10px auto;
+}
+button {
+    display: block;
+    margin: 10px auto;
+}
+textarea {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    height: 500px;
+}
+
+@media print {
+    button, textarea {
+        display: none;
+    }
+    main {
+        width: initial;
+        margin: 0;
+    }
+}
