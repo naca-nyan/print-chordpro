@@ -1,15 +1,15 @@
-import ChordPro from "https://cdn.jsdelivr.net/npm/chordproject-parser@0.2.14/+esm";
+import ChordSheetJS from "https://cdn.jsdelivr.net/npm/chordsheetjs@12.3.1/+esm";
 function render(s, target) {
-  const parser = new ChordPro.ChordProParser();
+  const parser = new ChordSheetJS.ChordProParser();
   const song = parser.parse(s);
   document.title = song.title;
-  const formatter = new ChordPro.HtmlFormatter();
-  const htmlTags = formatter.format(song);
-  target.innerHTML = htmlTags.join("\n");
+  const formatter = new ChordSheetJS.HtmlDivFormatter({
+    normalizeChords: false,
+    useUnicodeModifiers: true,
+  });
+  target.innerHTML = formatter.format(song);
   const replaceEntries = [
     [/Maj|maj|M/g, "\uE18A"],
-    ["b", "\u266D"],
-    ["#", "\u266F"],
     [/(.+)(\(.+?\))/g, "$1<sup>$2</sup>"],
     [/^([^\(]+)([-+][59]|omit[35])/g, "$1<sup>$2</sup>"],
   ];
